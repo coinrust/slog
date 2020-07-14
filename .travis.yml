@@ -1,0 +1,10 @@
+os:
+  - linux
+  - osx
+  - windows
+language: go
+go:
+  - "1.10.x"
+  - "1.11.x"
+script:
+  - go test -v -race -benchmem -bench=. . ./log
