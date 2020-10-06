@@ -21,7 +21,8 @@ const (
 )
 
 var (
-	levelNames = []byte("DIWEC")
+	cstLocation = time.FixedZone("CST", 60*60*8)
+	levelNames  = []byte("DIWEC")
 
 	internalLogger *Logger
 )
@@ -89,7 +90,7 @@ func (l *Logger) GetMinLevel() Level {
 func (l *Logger) Log(lv Level, msg string, args ...interface{}) {
 	r := recordPool.Get().(*Record)
 	r.level = lv
-	r.time = now()
+	r.time = now().In(cstLocation)
 	r.message = msg
 	r.args = args
 
